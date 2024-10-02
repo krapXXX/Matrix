@@ -5,10 +5,10 @@ using namespace std;
 //Предусмотреть, как минимум, функции для сложения матриц,  
 //умножения матриц, транспонирования матриц, присваивания матриц друг другу(конструктор копирования),  
 // установка и получение произвольного элемента матрицы(доступ через индексы). 
-
+template <class T>
 class Matrix
 {
-    int** ptr;
+    T * ptr;
     int str; 
     int st; 
 
@@ -23,13 +23,26 @@ public:
     {
         str = _str;
         st = _st;
-        ptr = new int* [str];
+        ptr = new T* [str];
 
         for (int i = 0; i < str; i++)
         {
-            ptr[i] = new int[st] {0};
+            ptr[i] = new T[st] {0};
         }
 
+    }
+    Matrix (const Matrix& obj)
+    {
+        str = obj->str;
+        st = obj->st;
+        ptr = new T[str][st];
+        for (int i = 0; i < str; i++)
+        {
+            for (int j = 0; j < st; j++)
+            {
+                ptr[i][j] = obj->ptr[i][j];
+            }
+        }
     }
     void Index(int x, int y)
     {
@@ -50,7 +63,7 @@ public:
         {
             for (int j = 0; j < st; j++)
             {
-                ptr[i][j] = rand() % 10;
+                ptr[i][j] = rand() % 100;
             }
         }
     }
@@ -123,16 +136,17 @@ public:
         delete[] ptr;
         cout << "Destructor\n";
     }
-
+    
 };
 
 int main()
 {
     srand(time(0));
-    Matrix obj1(3, 3);
-    Matrix obj2(5, 3);
-    Matrix obj3(3, 3);
-    Matrix obj4 = obj1;
+    Matrix <int> obj1(3, 3);
+    Matrix <double> obj2(5, 3);
+    Matrix <int> obj3(3, 3);
+    Matrix <double> obj4(2, 2);
+    Matrix <double> obj5 = obj4;
 
 
     obj1.Input();
@@ -146,9 +160,10 @@ int main()
     obj2.Print();
     obj3.Print();
     obj4.Print();
+    obj5.Print();
 
 
     obj1.Sum(obj3);
-    obj1.Mult(obj2);
+    obj2.Mult(obj5);
 
 }
