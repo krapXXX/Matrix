@@ -8,10 +8,10 @@ using namespace std;
 template <class T>
 class Matrix
 {
-    T * ptr;
+    T ** ptr;
     int str; 
     int st; 
-
+    
 public:
 
     Matrix()
@@ -33,16 +33,15 @@ public:
     }
     Matrix (const Matrix& obj)
     {
-        str = obj->str;
-        st = obj->st;
-        ptr = new T[str][st];
+        str = obj.str;
+        st = obj.st;
+        ptr = new T * [str];
+
         for (int i = 0; i < str; i++)
         {
-            for (int j = 0; j < st; j++)
-            {
-                ptr[i][j] = obj->ptr[i][j];
-            }
+            ptr[i] = new T[st]{ 0 };
         }
+
     }
     void Index(int x, int y)
     {
@@ -81,7 +80,6 @@ public:
     }
     void Sum(const Matrix& obj)const
     {
-
         if (str == obj.str && st == obj.st)
         {
             Matrix rez(str, st);
@@ -94,12 +92,10 @@ public:
             }
             cout << "Sum: " << endl;
             rez.Print();
-            // return rez;
         }
         else
         {
             cout << "Invalid" << endl;
-            // return *this;
         }
     }
     void Mult(const Matrix& obj)const
@@ -119,7 +115,6 @@ public:
             }
             cout << "Mult: " << endl;
             rez.Print();
-            //return rez;
         }
         else
         {
@@ -137,7 +132,25 @@ public:
         cout << "Destructor\n";
     }
     
+    
 };
+class Point
+    {
+        int x;
+        int y;
+    public:
+        Point operator+(int a)
+        {
+            Point ptr = new int* [x];
+            for (int i = 0; i < x; i++)
+            {
+                for (int j = 0; j < y; j++)
+                {
+                    
+                }
+            }
+        }
+    };
 
 int main()
 {
@@ -147,7 +160,7 @@ int main()
     Matrix <int> obj3(3, 3);
     Matrix <double> obj4(2, 2);
     Matrix <double> obj5 = obj4;
-
+    Matrix<Point>obj6(2, 2);
 
     obj1.Input();
     obj2.Input();
