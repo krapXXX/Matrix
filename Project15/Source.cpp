@@ -1,17 +1,17 @@
-#include<iostream> 
+п»ї#include<iostream> 
 #include "Time.h"
 using namespace std;
-//Создать класс для работы с матрицами. 
-//Предусмотреть, как минимум, функции для сложения матриц,  
-//умножения матриц, транспонирования матриц, присваивания матриц друг другу(конструктор копирования),  
-// установка и получение произвольного элемента матрицы(доступ через индексы). 
+//Г‘Г®Г§Г¤Г ГІГј ГЄГ«Г Г±Г± Г¤Г«Гї Г°Г ГЎГ®ГІГ» Г± Г¬Г ГІГ°ГЁГ¶Г Г¬ГЁ. 
+//ГЏГ°ГҐГ¤ГіГ±Г¬Г®ГІГ°ГҐГІГј, ГЄГ ГЄ Г¬ГЁГ­ГЁГ¬ГіГ¬, ГґГіГ­ГЄГ¶ГЁГЁ Г¤Г«Гї Г±Г«Г®Г¦ГҐГ­ГЁГї Г¬Г ГІГ°ГЁГ¶,  
+//ГіГ¬Г­Г®Г¦ГҐГ­ГЁГї Г¬Г ГІГ°ГЁГ¶, ГІГ°Г Г­Г±ГЇГ®Г­ГЁГ°Г®ГўГ Г­ГЁГї Г¬Г ГІГ°ГЁГ¶, ГЇГ°ГЁГ±ГўГ ГЁГўГ Г­ГЁГї Г¬Г ГІГ°ГЁГ¶ Г¤Г°ГіГЈ Г¤Г°ГіГЈГі(ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЄГ®ГЇГЁГ°Г®ГўГ Г­ГЁГї),  
+// ГіГ±ГІГ Г­Г®ГўГЄГ  ГЁ ГЇГ®Г«ГіГ·ГҐГ­ГЁГҐ ГЇГ°Г®ГЁГ§ГўГ®Г«ГјГ­Г®ГЈГ® ГЅГ«ГҐГ¬ГҐГ­ГІГ  Г¬Г ГІГ°ГЁГ¶Г»(Г¤Г®Г±ГІГіГЇ Г·ГҐГ°ГҐГ§ ГЁГ­Г¤ГҐГЄГ±Г»). 
 template <class T>
 class Matrix
 {
-    T ** ptr;
-    int str; 
-    int st; 
-    
+    T** ptr;
+    int str;
+    int st;
+
 public:
 
     Matrix()
@@ -23,15 +23,15 @@ public:
     {
         str = _str;
         st = _st;
-        ptr = new T* [str];
+        ptr = new T * [str];
 
         for (int i = 0; i < str; i++)
         {
-            ptr[i] = new T[st] {0};
+            ptr[i] = new T[st]{ 0 };
         }
 
     }
-    Matrix (const Matrix& obj)
+    Matrix(const Matrix& obj)
     {
         str = obj.str;
         st = obj.st;
@@ -131,36 +131,47 @@ public:
         delete[] ptr;
         cout << "Destructor\n";
     }
-    
-    
 };
 class Point
+{
+    int x;
+    int y;
+    friend ostream& operator<<(ostream& os, Point& obj);
+public:
+    Point()
     {
-        int x;
-        int y;
-    public:
-        Point operator+(int a)
-        {
-            Point ptr = new int* [x];
-            for (int i = 0; i < x; i++)
-            {
-                for (int j = 0; j < y; j++)
-                {
-                    
-                }
-            }
-        }
-    };
-
+        x = y = 0;
+    }
+    Point(int _x, int _y)
+    {
+        x = _x;
+        y = _y;
+    }
+    void Input()
+    {
+        x = rand() % 100;
+        y = rand() % 100;
+    }
+    void Print()const
+    {
+        cout << "(" << x << ", " << y << ")" << endl;
+    }
+};
+ostream& operator<<(ostream& os, Point& obj)
+{
+    os << obj.x << "\t";
+    os << obj.y << "\t";
+    return os;
+}
 int main()
 {
     srand(time(0));
-    Matrix <int> obj1(3, 3);
+    /*Matrix <int> obj1(3, 3);
     Matrix <double> obj2(5, 3);
     Matrix <int> obj3(3, 3);
     Matrix <double> obj4(2, 2);
     Matrix <double> obj5 = obj4;
-    Matrix<Point>obj6(2, 2);
+
 
     obj1.Input();
     obj2.Input();
@@ -177,6 +188,8 @@ int main()
 
 
     obj1.Sum(obj3);
-    obj2.Mult(obj5);
-
+    obj2.Mult(obj5);*/
+    Matrix<Point>obj6(2, 2);
+    obj6.Input();
+    obj6.Print();
 }
